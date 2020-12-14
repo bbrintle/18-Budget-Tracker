@@ -1,0 +1,18 @@
+{
+    "icons": [
+      {
+        "src": "/icons/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "name": "Budget Tracker",
+    "short_name": "Budget Tracker",
+    "orientation": "portrait",
+    "display": "standalone",
+    "start_url": "/",
+    "description": "An application for keeping track of your current budget.",
+    "background_color": "#01579b",
+    "theme_color": "#ffffff",
+    "theme-color": "#ffffff"
+  }
