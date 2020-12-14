@@ -1,3 +1,4 @@
+//set all needed public files into the cache
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
