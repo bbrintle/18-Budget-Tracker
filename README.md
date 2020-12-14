@@ -1,39 +1,42 @@
-# Expense Tracker
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Node Express Handlebars (Eat-Da-Burger)
 
-## Deployed Application
-
-[Expense Tracker](https://budgettracker-mh.herokuapp.com/)
-
-![Screenshot of Application](./public/assets/images/expensetracker1.jpg)
-![Screenshot of Application](./public/assets/images/expensetracker2.jpg)
-
-## Description 
-
-This full-stack web application allows users to keep track of a budget's expenses, and it allows a user to enter transactions while offline if running as a PWA.
-
-When the user navigates to the homepage and the application is online, the history of expenses are output in table and chart form. The user will see the total expenses at the top of the page. When the user enters the name of an expense and the amount of money associated with that expense, the "spend" button can be pressed to add to the total expense, and the "receive" button can be pressed to subtract the total expense. When the user has a negative expense, this means there are extra funds, and the total will therefore have a "+" sign before the output.
+## Table of Contents
+1. [ Description ](#desc)
+2. [ Features ](#features)
+3. [ Usage ](#usage)
+4. [ Questions ](#quest)
+    
+<a name="desc"></a>
+## 1. Description
+This application is supposed to allows users to keep track of their budget and allows a user to enter transactions while offline.
 
 This application stores user data in MongoDB Atlas while online, but it can be run locally without an internet connection (as well as being installed as a PWA) and store transactions in the browser's IndexedDB. When internet connection is back on, those transactions stored in IndexedDB will be sent to MongoDB, and future output will include those transactions while made offline.
 
+<a name="features"></a>
 ## Features
 
 * Node.js back end with Express routing. 
 * Manifest.json and service-worker.js provide PWA functionality.
-* Front-end written in JavaScript.
-* Takes advantage of JavaScript Fetch API.
 * MongoDB/Mongoose stores and retrieves transactions while online. 
 * While offline, IndexedDB keeps track of transactions.
 * Chart.js library provides tools needed for data charts.
-* Incorporates Bootstrap for styling. 
 
-## Credits
+    
+<a name="usage"></a>
+## 3. Usage
+Enter in the name and amount of the transaction and and decide wether the transaction is a Deposit or a Withdrawl. Each transaction will be logged and a chart showing you the flow of your budget will be provided.
+<br>
+<h3>Budget Tracker</h3>
+<img src="./public/images/Capture.PNG">
+<br>
 
-Michael Hanson
-* michaeledwardhanson@gmail.com
-* [GitHub](https://github.com/mhans003)
-* [LinkedIn](https://www.linkedin.com/in/michaeledwardhanson/)
 
-## License 
+<a name="quest"></a>
+## 4. Questions
+Please visit my GitHub to view all of my work:
+https://www.github.com/bbrintle 
 
-Licensed under the [MIT License](./LICENSE.txt).
+Check out the site:
+https://floating-fjord-65617.herokuapp.com/
+
+Contact me at: bbrintle@gmail.com
