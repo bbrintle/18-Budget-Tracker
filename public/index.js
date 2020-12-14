@@ -1,5 +1,3 @@
-const { verifyIndexedDB, useIndexedDB, clearStore } = require("./IndexedDB");
-
 let transactions = [];
 let myChart;
 
@@ -186,3 +184,86 @@ document.querySelector("#add-btn").onclick = function() {
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
 };
+
+//Ensure that IndexedDB is possible in the browser.
+function verifyIndexedDB() {
+  if (!window.indexedDB) {
+    console.log("Your browser doesn't support IndexedDB. There may be a problem saving/storing budget data.");
+    alert("Your browser doesn't support IndexedDB. There may be a problem saving/storing budget data.");
+    return false;
+  } else {
+    return true;
+  }
+}
+  
+function useIndexedDB(databaseName, storeName, method, object) {
+  return new Promise((resolve, reject) => {
+    //Open IndexedDB using the DB name passed in.
+    const request = window.indexedDB.open(databaseName, 1);
+    let db, tx, store;
+
+    request.onupgradeneeded = function(e) {
+      const db = request.result;
+      //Create the name of the transactions store.
+      db.createObjectStore(storeName, { keyPath: "key", autoIncrement: true});
+    };
+
+    request.onerror = function(e) {
+      console.log("There was an error");
+      alert("Something went wrong with IndexedDB.");
+    };
+
+    //If the request to open IndexedDB is successful:
+    request.onsuccess = function(e) {
+      //Identify the DB.
+      db = request.result;
+
+      //Create a transaction with the desired store.
+      tx = db.transaction(storeName, "readwrite");
+      store = tx.objectStore(storeName);
+
+      db.onerror = function(e) {
+        console.log("error");
+        alert("Something went wrong trying to access the correct store.");
+      };
+      //If the method passed in is 'put', store the passed in object.
+      if (method === "put") {
+        store.put(object);
+        console.log("Record inserted into IndexedDB");
+      } else if (method === "get") {
+        //If the method is 'get', grab all the items stored in indexedDB.
+        const all = store.getAll();
+        all.onsuccess = function() {
+          resolve(all.result);
+        };
+      } else if (method === "delete") {
+        store.delete(object._id);
+      }
+      tx.oncomplete = function() {
+        db.close();
+      };
+    };
+  });
+}
+
+function clearStore(databaseName, storeName) {
+  const request = window.indexedDB.open(databaseName, 1);
+
+  request.onsuccess = function(event) {
+    db = request.result;
+
+    let deleteTransaction = db.transaction(storeName, "readwrite");
+
+    deleteTransaction.onerror = function(event) {
+      console.log("Something went wrong opening a delete transaction.");
+    }
+
+    let objectStore = deleteTransaction.objectStore(storeName);
+
+    let objectStoreRequest = objectStore.clear();
+
+    objectStoreRequest.onsuccess = function(event) {
+      console.log("Delete Successful");
+    }
+  }
+}
