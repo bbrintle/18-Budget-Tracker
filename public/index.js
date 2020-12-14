@@ -186,14 +186,3 @@ document.querySelector("#add-btn").onclick = function() {
 document.querySelector("#sub-btn").onclick = function() {
   sendTransaction(false);
 };
-
-//Ensure that IndexedDB is possible in the browser.
-function verifyIndexedDB() {
-  if (!window.indexedDB) {
-    console.log("Your browser doesn't support IndexedDB. There may be a problem saving/storing budget data.");
-    alert("Your browser doesn't support IndexedDB. There may be a problem saving/storing budget data.");
-    return false;
-  } else {
-    return true;
-  }
-}
